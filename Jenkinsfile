@@ -18,9 +18,9 @@ pipeline {
         stage('Step1') {
             steps {
                 echo " ============== docker APACHE =================="
-                sh 'docker build -t ivanyuk1985/ivanyukdocker .'
-                sh 'docker run -d -p 8550:80 ivanyuk1985/ivanyukdocker'
-                sh 'docker push ivanyuk1985/ivanyukdocker'
+                sh 'docker build -t ivanyuk1985/ivanyukdocker:v2 .'
+                sh 'docker run -d -p 8551:80 ivanyuk1985/ivanyukdocker:v2'
+                sh 'docker push ivanyuk1985/ivanyukdocker:v2'
                 echo " ============== docker APACHE completed ! =================="
             }
         }
