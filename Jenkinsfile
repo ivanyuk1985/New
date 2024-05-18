@@ -59,7 +59,7 @@ pipeline {
             steps {
                 script {
                     // Запускаємо Docker контейнер з новим зображенням
-                    sh 'docker run -d -p 8551:80 --name ${CONTAINER_NAME} --health-cmd="curl --fail http://localhost:80 || exit 1" ivanyuk1985/ivanyuk1985:version${BUILD_NUMBER}'
+                    sh 'docker run -d -p 8551:80 --name ${CONTAINER_NAME} --health-cmd="curl --fail http://localhost:80 || exit 1" ivanyuk1985/ivanyukdocker:version${BUILD_NUMBER}'
 
                 }
             }
