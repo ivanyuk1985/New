@@ -3,10 +3,7 @@ pipeline {
 
     environment {
         // Додаємо креденшіали для Docker
-        DOCKER_CREDENTIALS_ID = 'dockerHub'
-        CONTAINER_NAME = 'ivanyuk1985'
-        DOCKERHUB_USERNAME = "${ivanyuk1985}"
-        DOCKERHUB_PASSWORD = "${1d416053-b85d-4f24-879a-71dd7ffdb9d1}"
+    CONTAINER_NAME = 'ivanyuk1985'
     }
     stages {
         stage("docker login") {
