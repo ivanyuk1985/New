@@ -55,7 +55,27 @@ pipeline {
                 }
             }
         }
+            stage('Delete Images Older than 20 Minutes') {
+            steps {
+                script {
+                    // Змініть на свій репозиторій
+                    def repo = "your-docker-repo"
+                    def images = sh(script: "curl -s https://hub.docker.com/v2/repositories/${repo}/tags/?page_size=100", returnStdout: true)
+                    def imageList = readJSON text: images
+                    def now = new Date().getTime()
+                    def threshold = 20 * 60 * 1000 // 20 хвилин в мілісекундах
 
+                    imageList.results.each { image ->
+                        def created = image.last_updated
+                        def createdTime = Date.parse("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'", created).getTime()
+                        if ((now - createdTime) > threshold) {
+                            def tag = image.name
+                            echo "Deleting image: ${repo}:${tag}, created at: ${created}"
+                            sh "docker rmi ${repo}:${tag} || true"
+                            sh "curl -s -X DELETE -u ${DOCKERHUB_USERNAME}:${DOCKERHUB_PASSWORD} https://hub.docker.com/v2/repositories/${repo}/tags/${tag}/"
+                 }
+            }
+        }
         
           stage('Запуск Docker контейнера') {
             steps {
