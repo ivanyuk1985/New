@@ -50,7 +50,7 @@ pipeline {
             steps {
                 script {
                     // Пушимо зображення на Docker Hub
-                    sh 'docker image prune -a --filter "until=24h" --force'
+                    sh 'docker image prune -a --filter "until=5m" --force'
 
                 }
             }
