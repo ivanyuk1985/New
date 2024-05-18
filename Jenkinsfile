@@ -4,7 +4,7 @@ pipeline {
     environment {
         // Додаємо креденшіали для Docker
         DOCKER_CREDENTIALS_ID = 'dockerHub'
-        CONTAINER_NAME = 'ivanyuk1985branch'
+        CONTAINER_NAME = 'ivanyuk1985'
     }
     stages {
         stage("docker login") {
@@ -26,7 +26,7 @@ pipeline {
                 echo " ============== docker APACHE =================="
                 sh 'docker build -t ivanyuk1985/ivanyukdocker:version${BUILD_NUMBER} .'
                 sh 'docker push ivanyuk1985/ivanyukdocker:version${BUILD_NUMBER}'
-                sh 'docker run -d -p 8551:80 ivanyuk1985/ivanyukdocker:v2'
+                
                 echo " ============== docker APACHE completed ! =================="
             }
         }
