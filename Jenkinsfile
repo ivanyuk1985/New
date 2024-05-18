@@ -73,6 +73,7 @@ pipeline {
                             echo "Deleting image: ${repo}:${tag}, created at: ${created}"
                             sh "docker rmi ${repo}:${tag} || true"
                             sh "curl -s -X DELETE -u ${DOCKERHUB_USERNAME}:${DOCKERHUB_PASSWORD} https://hub.docker.com/v2/repositories/${repo}/tags/${tag}/"
+                        }       
                  }
             }
         }
