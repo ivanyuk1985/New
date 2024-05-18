@@ -5,6 +5,8 @@ pipeline {
         // Додаємо креденшіали для Docker
         DOCKER_CREDENTIALS_ID = 'dockerHub'
         CONTAINER_NAME = 'ivanyuk1985'
+        DOCKERHUB_USERNAME = "${ivanyuk1985}"
+        DOCKERHUB_PASSWORD = "${1d416053-b85d-4f24-879a-71dd7ffdb9d1}"
     }
     stages {
         stage("docker login") {
@@ -72,7 +74,7 @@ pipeline {
                             def tag = image.name
                             echo "Deleting image: ${repo}:${tag}, created at: ${created}"
                             sh "docker rmi ${repo}:${tag} || true"
-                            sh "curl -s -X DELETE  https://hub.docker.com/v2/repositories/${repo}/tags/${tag}/"
+                            sh "curl -s -X DELETE -u ${DOCKERHUB_USERNAME}:${DOCKERHUB_PASSWORD} https://hub.docker.com/v2/repositories/${repo}/tags/${tag}/"
                         }
                     }
                 }
